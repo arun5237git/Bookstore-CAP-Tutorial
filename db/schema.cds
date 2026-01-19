@@ -12,9 +12,22 @@ entity Books : cuid, managed { // Entity should always be created in plural. i.e
         publishedAt : Date;
         pages       : Integer;
         price       : Decimal(9, 2);
+        stock       : Integer;
+        status      : Association to BookStatus;
         Chapters    : Composition of many Chapters // Links field Chapters to entity Chapters. Note, if composition is used, we can start in block letter
                               on Chapters.book = $self;
 }
+
+entity BookStatus { //To introduce criticality
+        key code        : String(1) enum { //Enumerators are like Domains in ABAP that has fixed values
+                    Available = 'A';
+                    Low_Stock = 'L';
+                    Unavailable = 'U';
+            }
+            criticality : Integer;
+            displayText : String;
+}
+
 
 entity Authors : cuid, managed {
         name  : String;
