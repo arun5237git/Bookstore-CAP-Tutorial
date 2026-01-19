@@ -6,10 +6,14 @@ using {
 namespace tutorial.db; //Namespace so taht it cab be used in srv and else where
 
 entity Books : cuid, managed { // Entity should always be created in plural. i.e, Books instead of Book
-        title    : String;
-        author   : Association to Authors;
-        Chapters : Composition of many Chapters     // Links field Chapters to entity Chapters. Note, if composition is used, we can start in block letter
-                           on Chapters.book = $self;
+        title       : String;
+        author      : Association to Authors;
+        genre       : String;
+        publishedAt : Date;
+        pages       : Integer;
+        price       : Decimal(9, 2);
+        Chapters    : Composition of many Chapters // Links field Chapters to entity Chapters. Note, if composition is used, we can start in block letter
+                              on Chapters.book = $self;
 }
 
 entity Authors : cuid, managed {
@@ -20,5 +24,5 @@ entity Authors : cuid, managed {
 
 entity Chapters : cuid, managed { // Created to show composition
             number : Integer;
-        key book   : Association to Books; 
+        key book   : Association to Books;
 }
