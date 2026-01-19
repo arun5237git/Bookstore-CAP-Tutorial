@@ -23,6 +23,8 @@ entity Authors : cuid, managed {
 }
 
 entity Chapters : cuid, managed { // Created to show composition
-            number : Integer;
         key book   : Association to Books;
+            number : Integer;
+            title  : String;
+            pages  : Integer;
 }
