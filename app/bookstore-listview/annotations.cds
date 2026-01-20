@@ -1,4 +1,6 @@
 using BookstoreService as service from '../../srv/service';
+using from '@sap/cds/common';
+
 annotate service.Books with @(
     UI.FieldGroup #GeneratedGroup : {
         $Type : 'UI.FieldGroupType',
@@ -31,6 +33,11 @@ annotate service.Books with @(
                 Value : status_code,
                 Label : 'Status',
                 Criticality : status.criticality,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : currency_code,
+                Label : 'Currency',
             },
         ],
     },
@@ -243,5 +250,9 @@ annotate service.BookStatus with {
         Common.Text : displayText,
         Common.Text.@UI.TextArrangement : #TextOnly,
     )
+};
+
+annotate service.Books with {
+    currency @Common.ValueListWithFixedValues : true
 };
 

@@ -1,6 +1,7 @@
 using {
         cuid,
-        managed
+        managed,
+        sap.common.Currencies,
 } from '@sap/cds/common'; //This is common library declaration and this helps us to use aspect cuid from common library
 
 namespace tutorial.db; //Namespace so taht it cab be used in srv and else where
@@ -12,6 +13,7 @@ entity Books : cuid, managed { // Entity should always be created in plural. i.e
         publishedAt : Date;
         pages       : Integer;
         price       : Decimal(9, 2);
+        currency : Association to Currencies;
         stock       : Integer;
         status      : Association to BookStatus;
         Chapters    : Composition of many Chapters // Links field Chapters to entity Chapters. Note, if composition is used, we can start in block letter
