@@ -5,10 +5,19 @@ service BookstoreService {
         actions {
             action addStock(); //Custom action bound to Books Entity
             action changePublishDate(newDate: Date); // Change published date
+            //Side effects to refresh page when stock & status code is updated using custom action
+            @(Common.SideEffects: {TargetProperties: [
+                'status_code',
+                'stock'
+            ]})
+
+            //If you want to update whole entity based on custom action without refreshing page
+            // @(Common.SideEffects: {TargetEntities: ['in']})
+
             // Change Status with custom dropdown based on Status. These annotations are copied from annotations.cds
             action changeStatus( @(Common: {
                                      ValueListWithFixedValues: true,
-                                     Label: 'Available Status',
+                                     Label                   : 'Available Status',
                                      ValueList               : {
                                          $Type         : 'Common.ValueListType',
                                          CollectionPath: 'BookStatus',
